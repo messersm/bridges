@@ -28,11 +28,11 @@ public class StatusLabel extends Label implements Observer {
         // Make sure, the messages are added, before adding
         // us as observer - otherwise a thread could call
         // update, before we have all required values.
-        messages.put(BoardState.NOBOARD, "Kein Spiel geladen");
-        messages.put(BoardState.INCORRECT, "Spiel enthält Fehler.");
-        messages.put(BoardState.SOLVED, "Spiel ist gelöst.");
-        messages.put(BoardState.UNSOLVABLE, "Spiel ist nicht mehr lösbar.");
-        messages.put(BoardState.UNSOLVED, "Spiel noch nicht gelöst.");
+        messages.put(BoardState.NOBOARD, "No puzzle loaded");
+        messages.put(BoardState.INCORRECT, "Incorrect bridges detected.");
+        messages.put(BoardState.SOLVED, "Puzzle solved.");
+        messages.put(BoardState.UNSOLVABLE, "Puzzle is no longer solvable.");
+        messages.put(BoardState.UNSOLVED, "Puzzle not solved yet.");
         game.addObserver(this);
 
         // Call update once, to set the correct label.

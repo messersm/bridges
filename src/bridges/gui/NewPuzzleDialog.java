@@ -36,24 +36,24 @@ public class NewPuzzleDialog extends CustomDialog {
      */
     public NewPuzzleDialog(Frame owner, GameModel game) {
         // make this dialog modal
-        super(owner, true, "Neues Rätsel", 0.8, 0.8);
+        super(owner, true, "New Puzzle", 0.8, 0.8);
         this.game = game;
         error = null;
 
         CheckboxGroup settings = new CheckboxGroup();
-        Checkbox autoBox = new Checkbox("Automatische Größe und Inselanzahl", settings, true);
-        Checkbox manuelBox = new Checkbox("Größe und / oder Inselanzahl selbst festlegen", settings, false);
-        Checkbox setIslandsBox = new Checkbox("Inselzahl festlegen");
+        Checkbox autoBox = new Checkbox("Randomize size and island count", settings, true);
+        Checkbox manuelBox = new Checkbox("Customize size and island count", settings, false);
+        Checkbox setIslandsBox = new Checkbox("Set island count");
 
-        Label widthLabel = new Label("Breite:");
-        Label heightLabel = new Label("Höhe:");
-        Label islandLabel = new Label("Inseln:");
+        Label widthLabel = new Label("Width:");
+        Label heightLabel = new Label("Height:");
+        Label islandLabel = new Label("Island count:");
 
         widthField = new TextField();
         heightField = new TextField();
         islandCountField = new TextField();
 
-        Button cancelButton = new Button("Abbrechen");
+        Button cancelButton = new Button("Cancel");
         Button confirmButton = new Button("OK");
 
         /* Set layout and add components using this layout:
@@ -193,7 +193,7 @@ public class NewPuzzleDialog extends CustomDialog {
         // and let the BridgesApp evaluate it.
         catch (NumberFormatException e) {
             // fixInputFields(); // No longer used.
-            error = "Fehlerhafte Eingabe: " + e.getMessage();
+            error = "Incorrect input: " + e.getMessage();
             setVisible(false);
         } catch (IllegalArgumentException e) {
             error = e.getMessage();

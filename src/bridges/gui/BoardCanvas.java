@@ -142,7 +142,6 @@ public class BoardCanvas extends Canvas implements Observer {
      * @param mouseY - the y coordinate of the mouse.
      */
     private void buildBridge(int mouseX, int mouseY) {
-        System.out.println("buildBridge()");
         Bridge bridge = createBridge(mouseX, mouseY);
         if (bridge != null) {
             // If we want to allow crossing bridges,
@@ -163,7 +162,6 @@ public class BoardCanvas extends Canvas implements Observer {
      * @param mouseY - the y coordinate of the mouse.
      */
     private void removeBridge(int mouseX, int mouseY) {
-        System.out.println("removeBridge()");
         Bridge bridge = searchBridge(mouseX, mouseY);
         if (bridge != null) {
             game.removeOneBridge(bridge);

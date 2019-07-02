@@ -79,24 +79,24 @@ public class BridgesApp extends Frame implements Observer {
          * we directly call addActionListener and add the callback
          * to a method of the BridgesApp object using Lambda expressions.
          */
-        Menu menu = new Menu("Datei");
-        menu.add(new MenuItem("Neues Rätsel")).addActionListener(
+        Menu menu = new Menu("File");
+        menu.add(new MenuItem("New Puzzle")).addActionListener(
                 e -> BridgesApp.this.newPuzzle());
-        menu.add(new MenuItem("Rätsel neu starten")).addActionListener(
+        menu.add(new MenuItem("Restart Puzzle")).addActionListener(
                 e -> BridgesApp.this.restartPuzzle());
         menu.addSeparator();
-        menu.add(new MenuItem("Rätsel laden")).addActionListener(
+        menu.add(new MenuItem("Load Puzzle")).addActionListener(
                 e -> BridgesApp.this.loadPuzzle());
-        menu.add(new MenuItem("Neues Rätsel aus zwei bestehenden Rätseln")).addActionListener(
+        menu.add(new MenuItem("Merge two Puzzles")).addActionListener(
                 e -> BridgesApp.this.loadMultiple());
-        menu.add(new MenuItem("Rätsel speichern")).addActionListener(
+        menu.add(new MenuItem("Save Puzzle")).addActionListener(
                 e -> BridgesApp.this.savePuzzle());
-        menu.add(new MenuItem("Rätsel speichern unter")).addActionListener(
+        menu.add(new MenuItem("Save Puzzle as")).addActionListener(
                 e -> BridgesApp.this.savePuzzleAs());
 
         // Create close entry and run System.exit(0) if chosen.
         menu.addSeparator();
-        menu.add(new MenuItem("Beenden")).addActionListener(
+        menu.add(new MenuItem("Exit")).addActionListener(
                 e -> System.exit(0));
 
         MenuBar menubar = new MenuBar();
@@ -133,10 +133,10 @@ public class BridgesApp extends Frame implements Observer {
 
         boardCanvas = new BoardCanvas(game);
 
-        Checkbox showMissingBox = new Checkbox("Anzahl fehlender Brücken anzeigen");
+        Checkbox showMissingBox = new Checkbox("Show missing bridge count");
 
-        solveButton = new Button("Automatisch lösen");
-        Button nextButton = new Button("Nächste Brücke");
+        solveButton = new Button("Solve automatically");
+        Button nextButton = new Button("Solve next bridge");
 
         Label statusLabel = new StatusLabel(game);
         solveLabel = new Label();
@@ -199,17 +199,17 @@ public class BridgesApp extends Frame implements Observer {
                         case UNSOLVABLE:
                             toggleSolving(false);
                             dialog = new MessageDialog(
-                                    this, "Hinweis", "Das Spiel ist nicht mehr lösbar.");
+                                    this, "Info", "The puzzle is no longer solvable.");
                             break;
                         case INCORRECT:
                             toggleSolving(false);
                             dialog = new MessageDialog(
-                                    this, "Hinweis", "Keine weiteren Lösungschritte möglich (Fehler vorhanden).");
+                                    this, "Info", "No more bridges available (mistakes detected).");
                             break;
                         case SOLVED:
                             toggleSolving(false);
                             dialog = new MessageDialog(
-                                    this, "Hinweis", "Spiel gelöst.");
+                                    this, "Info", "Puzzle solved.");
                         default:
                             break;
                     }
@@ -247,9 +247,9 @@ public class BridgesApp extends Frame implements Observer {
     private void toggleSolving(boolean solving) {
         isSolving = solving;
         if (isSolving)
-            solveButton.setLabel("Lösen anhalten.");
+            solveButton.setLabel("Stop solving");
         else
-            solveButton.setLabel("Automatisch lösen");
+            solveButton.setLabel("Solve automatically");
     }
 
     /**
@@ -258,7 +258,7 @@ public class BridgesApp extends Frame implements Observer {
     private void nextStep() {
         if (game.nextStep() == false) {
             Dialog dialog = new MessageDialog(
-                    this, "Hinweis", "Es sind keine weiteren Lösungsschritte möglich.");
+                    this, "Info", "No more bridges available.");
             dialog.setVisible(true);
         }
     }
@@ -273,7 +273,7 @@ public class BridgesApp extends Frame implements Observer {
         String error = dialog.getError();
         if (error != null) {
             // Display error and try again.
-            Dialog errorDialog = new MessageDialog(this, "Fehler", error);
+            Dialog errorDialog = new MessageDialog(this, "Error", error);
             errorDialog.setVisible(true);
             newPuzzle();
         }
@@ -295,7 +295,7 @@ public class BridgesApp extends Frame implements Observer {
          * Create a new file dialog and load the puzzle referenced by
          * filename, unless the choice was cancelled (filename == null).
          */
-        String fullname = chooseLoadFile("Neues Rätsel laden");
+        String fullname = chooseLoadFile("Load Puzzle");
 
         if (fullname != null) {
             try {
@@ -309,8 +309,8 @@ public class BridgesApp extends Frame implements Observer {
                 else
                     puzzleFilename = null;
             } catch (IOException | IllegalArgumentException e) {
-                Dialog errDialog = new MessageDialog(this, "Fehler",
-                        "Fehler beim lesen der Datei " + fullname + ":\n\n" + e.getMessage());
+                Dialog errDialog = new MessageDialog(this, "Error",
+                        "Error while reading file " + fullname + ":\n\n" + e.getMessage());
                 errDialog.setVisible(true);
             }
         }
@@ -366,8 +366,8 @@ public class BridgesApp extends Frame implements Observer {
         try {
             game.save(puzzleFilename);
         } catch (IOException | IllegalArgumentException e) {
-            MessageDialog dialog = new MessageDialog(this, "Fehler",
-                    "Datei '" + puzzleFilename + "' konnte nicht gespeichert werden: " +
+            MessageDialog dialog = new MessageDialog(this, "Error",
+                    "File '" + puzzleFilename + "' could not be saved: " +
                             e.getMessage());
             dialog.setVisible(true);
         }
@@ -382,7 +382,7 @@ public class BridgesApp extends Frame implements Observer {
          * filename, unless the choice was cancelled (filename == null).
          */
         toggleSolving(false);
-        FileDialog dialog = new FileDialog(this, "Rätsel speichern", FileDialog.SAVE);
+        FileDialog dialog = new FileDialog(this, "Save Puzzle", FileDialog.SAVE);
         dialog.setFile("*.bgs");
         dialog.setVisible(true);
         String filename = dialog.getFile();
@@ -417,11 +417,11 @@ public class BridgesApp extends Frame implements Observer {
          * Create a new file dialog and load the puzzle referenced by
          * filename, unless the choice was cancelled (filename == null).
          */
-        String left = chooseLoadFile("Linkes Rätsel laden");
+        String left = chooseLoadFile("Load left Puzzle");
         if (left == null)
             return;
 
-        String right = chooseLoadFile("Rechtes Rätsel laden");
+        String right = chooseLoadFile("Load right Puzzle");
         if (right == null)
             return;
 
@@ -433,8 +433,8 @@ public class BridgesApp extends Frame implements Observer {
             puzzleFilename = null;
 
         } catch (IOException | IllegalArgumentException e) {
-            Dialog errDialog = new MessageDialog(this, "Fehler",
-                    "Fehler beim Zusammenführen der Dateien:\n\n" + e.getMessage());
+            Dialog errDialog = new MessageDialog(this, "Error",
+                    "Error while merging the two puzzles:\n\n" + e.getMessage());
             errDialog.setVisible(true);
         }
     }
