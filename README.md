@@ -1,7 +1,9 @@
 # bridges
-A java implementation of the game "Bridges".
+> A java implementation of the game *Bridges*.
 
-## How to run
+![Screenshot](documentation/screenshot.png "Example screenshot")
+
+## How to compile and run
 If you want to open the project in an IDE see below. If you simply
 want to compile and run the application, this should do:
 
