@@ -66,7 +66,7 @@ public class BridgesApp extends Frame implements Observer {
         solver.start();
 
         // Set title, screen position (centered) and dimension (screen width * 2/3, height * 2/3).
-        this.setTitle("Bridges | Maik Messerschmidt / M-Nr. 9440577");
+        this.setTitle("Bridges");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         this.setSize((int) dim.getWidth() * 2 / 3, (int) dim.getHeight() * 2 / 3);
