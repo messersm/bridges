@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"bridges.game"},{"l":"bridges.gui"},{"l":"bridges.model"},{"l":"bridges.util"}]
