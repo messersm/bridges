@@ -44,7 +44,7 @@ public class BridgesApp extends Frame implements Observer {
     private Label solveLabel;
     private GameModel game;
     private boolean isSolving = false;
-    private int solveInterval = 5000;
+    private int solveInterval = 2000;
 
     /**
      * Create a new BridgesApp instance.

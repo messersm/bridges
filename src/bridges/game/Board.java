@@ -154,11 +154,17 @@ public class Board {
                 && islands.contains(bridge.getSecondIsland())))
             return false;
 
-        for (Bridge b : bridges)
+        for (Bridge b : bridges) {
+            // reject crossing bridges
             if (b.crosses(bridge))
                 return false;
+            // reject equal bridges
+            else if (b.equals(bridge))
+                return false;
+        }
 
-        if (bridge.isCovered(bridges))
+        // reject single bridges, if an equivalent double bridge is present.
+        if (! bridge.isDouble() && bridge.isCovered(bridges))
             return false;
 
         return true;
