@@ -41,6 +41,11 @@ function getHighlightedText(item) {
     return label;
 }
 function getURLPrefix(ui) {
+    // There's some bug in the javadoc search.
+    // This is an ugly workaround, which is explained here:
+    // https://stackoverflow.com/questions/52326318/maven-javadoc-search-redirects-to-undefined-url
+    return "";
+
     var urlPrefix="";
     if (useModuleDirectories) {
         var slash = "/";
