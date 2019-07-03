@@ -65,7 +65,7 @@ you to add two bridges to an island). I also translated the GUI into
 English (since it was required to be in German).
 
 ## Documentation
-You can find the English source code documentation in the [doc](doc/index.html) folder.
+You can find the English source code documentation [here](https://messersm.github.io/bridges/).
 There's also a description of the software architecture written in German in the
 [documentation](documentation/Architekturbeschreibung.pdf) folder. (The
 class ``bridges.util.BoardMerger`` is not mentioned by this document, since it
